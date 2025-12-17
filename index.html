@@ -13,10 +13,10 @@
         }
 
         [data-theme="light"] {
-            --bg: #f1f5f9;
-            --glass: rgba(255, 255, 255, 0.8);
+            --bg: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.7);
             --border: rgba(0, 0, 0, 0.05);
-            --text: #1e293b;
+            --text: #0f172a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
@@ -28,166 +28,149 @@
             justify-content: center;
             background: var(--bg);
             color: var(--text);
-            transition: 0.4s;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
             user-select: none;
         }
 
-        /* Ana Kart */
+        /* iOS Switch Styles */
+        .top-bar { 
+            position: fixed; top: 30px; right: 30px; 
+            display: flex; align-items: center; gap: 12px; z-index: 100;
+            background: var(--glass); padding: 8px 16px; border-radius: 40px;
+            backdrop-filter: blur(10px); border: 1px solid var(--border);
+        }
+        .switch { position: relative; width: 46px; height: 26px; cursor: pointer; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { 
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+            background: #94a3b8; border-radius: 34px; transition: 0.4s; 
+        }
+        .slider:before { 
+            position: absolute; content: ""; height: 20px; width: 20px; 
+            left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.4s; 
+        }
+        input:checked + .slider { background: #34c759; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* Card container */
         .container {
             background: var(--glass);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--border);
-            padding: 45px 25px;
+            padding: 50px 30px;
             border-radius: 40px;
             text-align: center;
             width: 90%;
             max-width: 400px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
         }
 
-        h1 { font-size: 2.2rem; margin-bottom: 5px; letter-spacing: -1px; }
-        .username { opacity: 0.5; display: block; margin-bottom: 35px; font-size: 0.9rem; font-weight: 500; }
+        h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 5px; }
+        .username { opacity: 0.5; margin-bottom: 35px; display: block; font-size: 0.9rem; }
 
-        /* Butonlar */
+        /* Buttons */
         .btn-box { display: flex; flex-direction: column; gap: 15px; }
         .btn {
             background: var(--glass);
             border: 1px solid var(--border);
-            padding: 18px;
-            border-radius: 22px;
+            padding: 16px;
+            border-radius: 20px;
             color: var(--text);
             font-weight: 700;
             cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            text-decoration: none;
+            transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        .btn:active { transform: scale(0.94); }
-        .insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); border: none; color: white; }
-        .wa { background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.2); }
+        .btn:active { transform: scale(0.95); }
+        .insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: white; border: none; }
+        .wa { background: rgba(34, 197, 94, 0.1); }
 
-        /* Mail Modal */
+        /* Modal Styles */
         #mail-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(15px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
+            display: none; align-items: center; justify-content: center; z-index: 1000;
         }
-
         .modal-content {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 35px;
-            text-align: center;
-            width: 85%;
-            max-width: 350px;
+            background: var(--bg); border: 1px solid var(--border);
+            padding: 30px; border-radius: 35px; text-align: center; width: 85%; max-width: 350px;
         }
-
-        .mail-display {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 15px;
-            margin: 20px 0;
-            font-size: 0.85rem;
-            border: 1px dashed var(--border);
-            color: var(--text);
+        .mail-box {
+            background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px;
+            margin: 20px 0; font-size: 0.85rem; border: 1px dashed var(--border);
         }
-
         .action-btn {
-            background: #10b981;
-            color: white;
-            padding: 14px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-bottom: 10px;
+            background: #10b981; color: white; padding: 14px; border-radius: 15px;
+            cursor: pointer; font-weight: bold; margin-bottom: 10px;
         }
-
         .close-btn { opacity: 0.5; font-size: 0.8rem; cursor: pointer; margin-top: 15px; }
-
     </style>
 </head>
 <body oncontextmenu="return false">
+
+    <div class="top-bar">
+        <span style="font-size: 0.8rem; font-weight: 600;">Mod</span>
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+    </div>
 
     <div class="container">
         <h1>Musa Can</h1>
         <span class="username">@mutaffaa.l</span>
 
         <div class="btn-box">
-            <div class="btn insta" id="ig-go">📸 Instagram</div>
-            
-            <div class="btn wa" id="wa-go">🟢 WhatsApp</div>
-            
-            <div class="btn" id="mail-open">📧 E-posta Adresim</div>
+            <div class="btn insta" id="ig-btn">📸 Instagram</div>
+            <div class="btn wa" onclick="window.open('https://wa.me/905XXXXXXXXX')">🟢 WhatsApp</div>
+            <div class="btn" id="mail-open">📧 İletişim Bilgileri</div>
         </div>
     </div>
 
     <div id="mail-modal">
         <div class="modal-content">
-            <h3 style="font-size: 1.2rem;">E-posta Adresim</h3>
-            <div class="mail-display" id="target-mail">musacann273727@gmail.com</div>
-            <div class="action-btn" id="copy-mail">Adresi Kopyala</div>
-            <div class="action-btn" style="background: #4285F4;" id="gmail-go">Gmail ile Yaz</div>
-            <div class="close-btn" id="mail-close">Kapat</div>
+            <h3>E-posta Adresim</h3>
+            <div class="mail-box" id="m-val">musacann273727@gmail.com</div>
+            <div class="action-btn" id="copy-btn">Adresi Kopyala</div>
+            <div class="action-btn" style="background: #4285F4;" onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=musacann273727@gmail.com')">Gmail ile Yaz</div>
+            <div class="close-btn" id="close-modal">Kapat</div>
         </div>
     </div>
 
     <script>
-        const config = {
-            ig: "mutaffaa.l",
-            wa: "905XXXXXXXXX", // Buraya numaranı yaz knk
-            mail: "musacann273727@gmail.com"
-        };
-
-        // Instagram: Önce uygulama, olmazsa web
-        document.getElementById('ig-go').onclick = () => {
+        // Instagram Deep Link
+        document.getElementById('ig-btn').onclick = () => {
+            const user = "mutaffaa.l";
             const start = Date.now();
-            window.location.href = "instagram://user?username=" + config.ig;
+            window.location.href = "instagram://user?username=" + user;
             setTimeout(() => {
-                if (Date.now() - start < 1000) {
-                    window.open("https://www.instagram.com/" + config.ig, "_blank");
-                }
+                if (Date.now() - start < 1000) window.open("https://instagram.com/" + user, "_blank");
             }, 500);
         };
 
-        // WhatsApp
-        document.getElementById('wa-go').onclick = () => {
-            window.open("https://wa.me/" + config.wa, "_blank");
-        };
-
-        // Mail Panel Kontrolü
+        // Modal Controls
         const modal = document.getElementById('mail-modal');
         document.getElementById('mail-open').onclick = () => modal.style.display = 'flex';
-        document.getElementById('mail-close').onclick = () => modal.style.display = 'none';
+        document.getElementById('close-modal').onclick = () => modal.style.display = 'none';
 
-        // Kopyalama
-        document.getElementById('copy-mail').onclick = function() {
-            navigator.clipboard.writeText(config.mail);
+        // Copy Feature
+        document.getElementById('copy-btn').onclick = function() {
+            navigator.clipboard.writeText("musacann273727@gmail.com");
             this.innerText = "KOPYALANDI!";
-            this.style.background = "#059669";
             setTimeout(() => {
                 this.innerText = "Adresi Kopyala";
-                this.style.background = "#10b981";
                 modal.style.display = 'none';
             }, 1200);
         };
 
-        // Gmail Web Yönlendirme
-        document.getElementById('gmail-go').onclick = () => {
-            window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${config.mail}`, '_blank');
+        // Theme Switcher (iPhone style)
+        document.getElementById('theme-toggle').onchange = function() {
+            document.body.setAttribute('data-theme', this.checked ? 'light' : 'dark');
         };
 
-        // Güvenlik (F12, Sağ Tık)
+        // Güvenlik
         document.onkeydown = (e) => {
             if(e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 73 || e.keyCode == 83))) return false;
         };
