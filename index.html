@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Kişisel Blog</title>
+    <title>Premium Özel Blog</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -30,9 +30,10 @@
             color: var(--text);
             overflow-x: hidden;
             min-height: 100vh;
+            user-select: none; /* Metin seçimini engeller (Koruma) */
         }
 
-        /* --- ÖZELLİK 5: Hareketli Arka Plan --- */
+        /* --- Hareketli Arka Plan --- */
         .bg-animate {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -48,11 +49,11 @@
             animation: move 20s infinite alternate;
         }
         @keyframes move {
-            from { transform: translate(0, 0); }
-            to { transform: translate(100vw, 100vh); }
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(80vw, 80vh); }
         }
 
-        /* --- ÖZELLİK 1: Dark/Light Mode Switch --- */
+        /* --- Mod Değiştirme Butonu --- */
         .theme-switch {
             position: fixed;
             top: 20px; right: 20px;
@@ -60,10 +61,10 @@
             cursor: pointer;
             background: var(--glass);
             border: 1px solid var(--glass-border);
-            padding: 10px 15px;
+            padding: 12px 18px;
             border-radius: 50px;
             backdrop-filter: blur(10px);
-            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .container {
@@ -72,7 +73,10 @@
             padding: 100px 20px;
         }
 
-        /* --- Glass Card Özelliği --- */
+        header { margin-bottom: 60px; text-align: left; }
+        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -3px; margin-bottom: 10px; }
+
+        /* --- Glass Card Tasarımı --- */
         .glass-card {
             background: var(--glass);
             backdrop-filter: blur(15px);
@@ -84,61 +88,63 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
         }
 
-        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -3px; margin-bottom: 10px; }
-        .post-title { font-size: 1.8rem; font-weight: 600; margin-bottom: 10px; display: block; }
-        .post-date { color: var(--accent); font-weight: 600; font-size: 0.8rem; letter-spacing: 2px; }
+        .post-date { color: var(--accent); font-weight: 600; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; }
+        .post-title { font-size: 1.8rem; font-weight: 700; margin: 10px 0; display: block; }
 
-        .contact-btns { display: flex; gap: 15px; margin-top: 30px; }
+        /* --- İletişim Butonları --- */
+        .contact-btns { display: flex; gap: 15px; margin-top: 40px; }
         .btn {
             flex: 1;
-            padding: 15px;
-            border-radius: 15px;
+            padding: 18px;
+            border-radius: 20px;
             text-align: center;
             text-decoration: none;
-            font-weight: 600;
-            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
-        .btn-wa { background: #22c55e; }
+        .btn-wa { background: #22c55e; color: white; }
         .btn-mail { background: var(--text); color: var(--bg); }
-
-        .btn:hover { transform: translateY(-5px); opacity: 0.9; }
+        .btn:hover { transform: translateY(-5px); filter: brightness(1.1); }
 
     </style>
 </head>
-<body>
-
-    <div class="bg-animate">
-        <div class="circle" style="width: 300px; height: 300px; top: -10%; left: -10%;"></div>
-        <div class="circle" style="width: 400px; height: 400px; bottom: -10%; right: -10%; animation-delay: -5s;"></div>
+<body oncontextmenu="return false"> <div class="bg-animate">
+        <div class="circle" style="width: 300px; height: 300px; top: 10%; left: 10%;"></div>
+        <div class="circle" style="width: 450px; height: 450px; bottom: 10%; right: 10%; animation-delay: -7s;"></div>
     </div>
 
-    <div class="theme-switch" onclick="toggleTheme()">🌓</div>
+    <div class="theme-switch" onclick="toggleTheme()">🌓 Mod Değiştir</div>
 
     <div class="container">
-        <header style="margin-bottom: 60px;">
+        <header>
             <h1>Selam.</h1>
-            <p style="opacity: 0.6;">Düşüncelerim ve diğer her şey.</p>
+            <p style="opacity: 0.6; font-size: 1.2rem;">Kişisel ve özel notlarımı burada paylaşıyorum.</p>
         </header>
 
         <div class="glass-card">
-            <span class="post-date">17 ARALIK 2025</span>
-            <span class="post-title">Geleceğin Tasarımı</span>
-            <p style="opacity: 0.8;">Cam efekti ve karanlık modun uyumu gerçekten büyüleyici. Bu site artık benim dijital evim.</p>
+            <span class="post-date">17 Aralık 2025</span>
+            <span class="post-title">Mükemmel Tasarım</span>
+            <p style="opacity: 0.8;">Her şeyin bir arada olduğu, güvenli ve şık bir deneyim oluşturduk.</p>
         </div>
 
         <div class="glass-card">
-            <span class="post-date">10 ARALIK 2025</span>
-            <span class="post-title">Minimalist Yaşam</span>
-            <p style="opacity: 0.8;">Gereksiz her şeyden kurtulmak, zihni özgürleştirir. Tasarımda da öyle.</p>
+            <span class="post-date">15 Aralık 2025</span>
+            <span class="post-title">Gizlilik ve Estetik</span>
+            <p style="opacity: 0.8;">Bu site sadece sizinle paylaştığım özel bir bağlantı üzerinden çalışır.</p>
         </div>
 
         <div class="contact-btns">
-            <a href="mailto:musa.273727@mail.com" class="btn btn-mail">Mail</a>
-            <a href="https://wa.me/905308977672" class="btn btn-wa">WhatsApp</a>
+            <a href="mailto:musa.273727@gmail.com" class="btn btn-mail">✉ Mail Gönder</a>
+            <a href="https://wa.me/905308977672" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
         </div>
     </div>
 
     <script>
+        // --- TEMA DEĞİŞTİRME ---
         function toggleTheme() {
             const body = document.body;
             if (body.getAttribute('data-theme') === 'light') {
@@ -147,32 +153,18 @@
                 body.setAttribute('data-theme', 'light');
             }
         }
+
+        // --- KAYNAK KODU VE KISAYOL ENGELLEME ---
+        document.onkeydown = function(e) {
+            // F12 (Geliştirici Araçları)
+            if(e.keyCode == 123) return false;
+            // Ctrl+Shift+I (İncele)
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+            // Ctrl+U (Kaynak Kodu)
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+            // Ctrl+S (Kaydetme)
+            if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) return false;
+        };
     </script>
 </body>
 </html>
-// Sağ tık engelleme
-document.addEventListener('contextmenu', event => event.preventDefault());
-
-// Klavye kısayollarını engelleme (Ctrl+U, F12, Ctrl+Shift+I vb.)
-document.onkeydown = function(e) {
-    // F12 engelleme
-    if(e.keyCode == 123) {
-        return false;
-    }
-    // Ctrl+Shift+I (İncele) engelleme
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-        return false;
-    }
-    // Ctrl+Shift+J (Konsol) engelleme
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-        return false;
-    }
-    // Ctrl+U (Kaynak Kodu) engelleme
-    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-        return false;
-    }
-    // Ctrl+S (Kaydetme) engelleme
-    if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
-        return false;
-    }
-};
