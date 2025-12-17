@@ -2,34 +2,40 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Özel Blog</title>
     <style>
         :root {
             --bg: #0b0f19;
             --text: #ffffff;
             --card: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
         }
         [data-theme="light"] {
             --bg: #f2f2f7;
-            --text: #000000;
+            --text: #1c1c1e;
             --card: #ffffff;
+            --border: rgba(0, 0, 0, 0.05);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
+
         body {
-            margin: 0;
-            font-family: -apple-system, sans-serif;
+            font-family: -apple-system, system-ui, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            transition: 0.4s;
-            user-select: none; /* Metin seçmeyi engeller */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
         }
 
         /* iOS SWITCH */
         .switch-area {
             position: fixed;
-            top: 25px;
-            right: 25px;
+            top: 20px;
+            right: 20px;
             z-index: 1000;
         }
         .switch {
@@ -45,7 +51,6 @@
             top: 0; left: 0; right: 0; bottom: 0;
             background-color: #39393d;
             border-radius: 30px;
-            transition: .4s;
         }
         .slider:before {
             position: absolute;
@@ -54,42 +59,54 @@
             left: 3px; bottom: 3px;
             background-color: white;
             border-radius: 50%;
-            transition: .4s;
         }
         input:checked + .slider { background-color: #34c759; }
         input:checked + .slider:before { transform: translateX(20px); }
 
+        /* KART TASARIMI */
         .container {
-            max-width: 500px;
+            width: 90%; /* Mobilde ekranı kaplamasın diye */
+            max-width: 400px; /* Kartın maksimum genişliği */
             margin: 0 auto;
-            padding: 100px 20px;
         }
 
         .glass-card {
             background: var(--card);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(128,128,128,0.2);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            padding: 25px; /* İç boşluğu biraz azalttık */
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
         }
 
-        /* GİZLİ BUTONLAR - Link Değildir! */
-        .action-btn {
-            width: 100%;
-            padding: 18px;
-            margin-top: 15px;
-            border-radius: 15px;
-            text-align: center;
-            font-weight: 700;
-            cursor: pointer; /* Tıklanabilir el imleci çıkar */
-            transition: 0.3s;
-            border: none;
-            display: block;
+        h1 { font-size: 2rem; margin-bottom: 10px; font-weight: 700; }
+        p { opacity: 0.7; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.4; }
+
+        /* BUTON GRUBU - TAŞMAYI ÖNLEYEN YAPI */
+        .btn-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
+
+        .action-btn {
+            width: 100%; /* Kartın içinde kalmasını sağlar */
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .btn-wa { background: #25D366; color: white; }
         .btn-mail { background: var(--text); color: var(--bg); }
-        .action-btn:hover { transform: scale(1.02); opacity: 0.9; }
+        .action-btn:hover { opacity: 0.9; transform: scale(0.98); }
 
     </style>
 </head>
@@ -104,36 +121,37 @@
 
     <div class="container">
         <div class="glass-card">
-            <h1>Merhaba.</h1>
-            <p>Bu butonların üzerine geldiğinde tarayıcının sol altında hiçbir bilgi çıkmaz. Tam koruma sağlandı.</p>
+            <h1>Profilim</h1>
+            <p>Taşma sorunu giderildi, artık her cihazda tam sığıyor.</p>
             
-            <div class="action-btn btn-mail" onclick="islem('mail')">E-posta Gönder</div>
-            <div class="action-btn btn-wa" onclick="islem('wa')">WhatsApp'tan Yaz</div>
+            <div class="btn-wrapper">
+                <div class="action-btn btn-mail" onclick="islem('mail')">E-posta Gönder</div>
+                <div class="action-btn btn-wa" onclick="islem('wa')">WhatsApp'tan Yaz</div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Bilgilerini buraya yaz knk
-        const m = "seninmailin@gmail.com";
-        const n = "905308977672";
+        // Bilgilerini buraya yaz
+        const mailAdresi = "seninmail@gmail.com";
+        const telNo = "905XXXXXXXXX";
 
         function islem(tip) {
             if(tip === 'mail') {
-                // Linke tıklanmış gibi yapar ama status barda göstermez
-                window.location.href = "mailto:" + m;
+                window.location.href = "mailto:" + mailAdresi;
             } else {
-                window.open("https://wa.me/" + n, "_blank");
+                window.open("https://wa.me/" + telNo, "_blank");
             }
         }
 
         function temaDegistir() {
             const body = document.body;
-            const check = document.getElementById('modeCheck').checked;
-            if(check) body.setAttribute('data-theme', 'light');
+            const isChecked = document.getElementById('modeCheck').checked;
+            if(isChecked) body.setAttribute('data-theme', 'light');
             else body.removeAttribute('data-theme');
         }
 
-        // F12 ve Sağ Tık koruması devam ediyor
+        // F12 ve Ctrl+U engeli
         document.onkeydown = function(e) {
             if(e.keyCode == 123 || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) return false;
         };
