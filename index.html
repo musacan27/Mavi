@@ -3,167 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Özel Blog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Özel Dijital Alan</title>
     <style>
+        /* --- TEMEL AYARLAR --- */
         :root {
             --bg: #0f172a;
-            --text: #f8fafc;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #ffffff;
             --accent: #38bdf8;
+            --card: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
         [data-theme="light"] {
-            --bg: #f1f5f9;
+            --bg: #ffffff;
             --text: #0f172a;
-            --glass: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(0, 0, 0, 0.05);
             --accent: #0284c7;
+            --card: rgba(15, 23, 42, 0.05);
+            --border: rgba(15, 23, 42, 0.1);
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
             background-color: var(--bg);
             color: var(--text);
-            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            transition: background 0.5s ease, color 0.5s ease;
             min-height: 100vh;
-            user-select: none; /* Metin seçimini engeller (Koruma) */
         }
 
-        /* --- Hareketli Arka Plan --- */
-        .bg-animate {
+        /* --- MOD DEĞİŞTİRME BUTONU (SAĞ ÜSTTE GÖRÜNÜR) --- */
+        #theme-toggle {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        .circle {
-            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            padding: 12px 20px;
             background: var(--accent);
-            filter: blur(80px);
-            border-radius: 50%;
-            opacity: 0.15;
-            animation: move 20s infinite alternate;
-        }
-        @keyframes move {
-            from { transform: translate(-10%, -10%); }
-            to { transform: translate(80vw, 80vh); }
-        }
-
-        /* --- Mod Değiştirme Butonu --- */
-        .theme-switch {
-            position: fixed;
-            top: 20px; right: 20px;
-            z-index: 100;
-            cursor: pointer;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 12px 18px;
+            color: white;
+            border: none;
             border-radius: 50px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
+        /* --- HAREKETLİ ARKA PLAN (KÜRELER) --- */
+        .glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            filter: blur(120px);
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: -1;
+            animation: float 15s infinite alternate;
+        }
+
+        @keyframes float {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(100%, 50%); }
+        }
+
+        /* --- İÇERİK --- */
         .container {
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 100px 20px;
         }
 
-        header { margin-bottom: 60px; text-align: left; }
-        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -3px; margin-bottom: 10px; }
-
-        /* --- Glass Card Tasarımı --- */
         .glass-card {
-            background: var(--glass);
+            background: var(--card);
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
         }
 
-        .post-date { color: var(--accent); font-weight: 600; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; }
-        .post-title { font-size: 1.8rem; font-weight: 700; margin: 10px 0; display: block; }
+        h1 { font-size: 3rem; margin-bottom: 40px; }
 
-        /* --- İletişim Butonları --- */
-        .contact-btns { display: flex; gap: 15px; margin-top: 40px; }
+        /* --- İLETİŞİM BUTONLARI --- */
+        .btns { display: flex; gap: 10px; margin-top: 30px; }
         .btn {
             flex: 1;
-            padding: 18px;
-            border-radius: 20px;
+            padding: 15px;
             text-align: center;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            border-radius: 12px;
+            font-weight: bold;
         }
-        .btn-wa { background: #22c55e; color: white; }
-        .btn-mail { background: var(--text); color: var(--bg); }
-        .btn:hover { transform: translateY(-5px); filter: brightness(1.1); }
+        .btn-mail { background: #333; color: white; }
+        .btn-wa { background: #25D366; color: white; }
 
     </style>
 </head>
-<body oncontextmenu="return false"> <div class="bg-animate">
-        <div class="circle" style="width: 300px; height: 300px; top: 10%; left: 10%;"></div>
-        <div class="circle" style="width: 450px; height: 450px; bottom: 10%; right: 10%; animation-delay: -7s;"></div>
-    </div>
+<body oncontextmenu="return false">
 
-    <div class="theme-switch" onclick="toggleTheme()">🌓 Mod Değiştir</div>
+    <button id="theme-toggle" onclick="toggleMode()">Gece/Gündüz Modu</button>
+
+    <div class="glow"></div>
 
     <div class="container">
-        <header>
-            <h1>Selam.</h1>
-            <p style="opacity: 0.6; font-size: 1.2rem;">Kişisel ve özel notlarımı burada paylaşıyorum.</p>
-        </header>
-
+        <h1>Selam.</h1>
+        
         <div class="glass-card">
-            <span class="post-date">17 Aralık 2025</span>
-            <span class="post-title">Mükemmel Tasarım</span>
-            <p style="opacity: 0.8;">Her şeyin bir arada olduğu, güvenli ve şık bir deneyim oluşturduk.</p>
+            <h3>Günlük Notlar</h3>
+            <p>Burası cam efektiyle parlayan, modern ve gizli blogum.</p>
         </div>
 
         <div class="glass-card">
-            <span class="post-date">15 Aralık 2025</span>
-            <span class="post-title">Gizlilik ve Estetik</span>
-            <p style="opacity: 0.8;">Bu site sadece sizinle paylaştığım özel bir bağlantı üzerinden çalışır.</p>
+            <h3>Gizli Bilgi</h3>
+            <p>Bu sayfayı sadece sen görebilirsin.</p>
         </div>
 
-        <div class="contact-btns">
-            <a href="mailto:musa.273727@gmail.com" class="btn btn-mail">✉ Mail Gönder</a>
-            <a href="https://wa.me/905308977672" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
+        <div class="btns">
+            <a href="mailto:musa.273727@gmail.com" class="btn btn-mail">Mail At</a>
+            <a href="https://wa.me/905308977672" class="btn btn-wa">WhatsApp</a>
         </div>
     </div>
 
     <script>
-        // --- TEMA DEĞİŞTİRME ---
-        function toggleTheme() {
+        // MOD DEĞİŞTİRME FONKSİYONU
+        function toggleMode() {
             const body = document.body;
-            if (body.getAttribute('data-theme') === 'light') {
+            if (body.hasAttribute('data-theme')) {
                 body.removeAttribute('data-theme');
             } else {
                 body.setAttribute('data-theme', 'light');
             }
         }
 
-        // --- KAYNAK KODU VE KISAYOL ENGELLEME ---
+        // KISAYOL ENGELLEME (Ctrl+U, F12 vb.)
         document.onkeydown = function(e) {
-            // F12 (Geliştirici Araçları)
-            if(e.keyCode == 123) return false;
-            // Ctrl+Shift+I (İncele)
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-            // Ctrl+U (Kaynak Kodu)
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-            // Ctrl+S (Kaydetme)
-            if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) return false;
+            if(e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 'U'.charCodeAt(0) || e.keyCode == 'I'.charCodeAt(0)))) {
+                return false;
+            }
         };
     </script>
 </body>
