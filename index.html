@@ -3,193 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGen Store | Premium Alışveriş</title>
+    <title>MegaStore | Profesyonel Alışveriş</title>
     <style>
         :root {
-            --bg: #0b0f19;
-            --text: #ffffff;
-            --card: rgba(255, 255, 255, 0.05);
-            --accent: #34c759;
-            --border: rgba(255, 255, 255, 0.1);
+            --primary: #ff6000; /* Trendyol turuncusu gibi canlı bir renk */
+            --bg: #f4f4f7;
+            --text: #191919;
+            --white: #ffffff;
+            --border: #e2e2e2;
         }
 
-        [data-theme="light"] {
-            --bg: #f2f2f7;
-            --text: #1c1c1e;
-            --card: #ffffff;
-            --accent: #007aff;
-            --border: rgba(0, 0, 0, 0.05);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: 0.3s ease; }
+        body { background-color: var(--bg); color: var(--text); }
 
-        body {
-            font-family: -apple-system, system-ui, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            padding-bottom: 100px;
-        }
-
-        /* --- HEADER & NAVBAR --- */
-        header {
-            padding: 20px;
+        /* --- ÜST MENÜ (NAVBAR) --- */
+        nav {
+            background: var(--white);
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            background: rgba(var(--bg), 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky; top: 0; z-index: 1000;
         }
-
-        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; }
-
-        /* --- PRODUCT GRID --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary); }
+        .search-bar {
+            flex: 0.6;
+            display: flex;
         }
-
-        .product-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 15px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-image {
+        .search-bar input {
             width: 100%;
-            height: 200px;
-            background: rgba(128,128,128,0.1);
-            border-radius: 18px;
-            margin-bottom: 15px;
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px 0 0 8px;
+            outline: none;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+        }
+
+        /* --- ANA SAYFA DÜZENİ --- */
+        .main-content {
+            display: flex;
+            max-width: 1300px;
+            margin: 20px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* SOL KATEGORİ MENÜSÜ */
+        .sidebar {
+            flex: 0.25;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            height: fit-content;
+        }
+        .sidebar h3 { margin-bottom: 15px; font-size: 18px; border-bottom: 2px solid var(--bg); padding-bottom: 10px; }
+        .sidebar ul { list-style: none; }
+        .sidebar ul li {
+            padding: 10px 0;
+            cursor: pointer;
+            transition: 0.2s;
+            border-bottom: 1px solid #f9f9f9;
+        }
+        .sidebar ul li:hover { color: var(--primary); padding-left: 5px; }
+
+        /* SAĞ ÜRÜN ALANI */
+        .products-area { flex: 0.75; }
+
+        /* SLIDER / BANNER */
+        .hero-banner {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #ff6000, #ff9e00);
+            border-radius: 15px;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
-        .price {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin: 10px 0;
-            color: var(--accent);
-        }
-
-        .add-to-cart {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            border: none;
-            background: var(--accent);
+            padding: 40px;
             color: white;
-            font-weight: 600;
-            cursor: pointer;
         }
 
-        .add-to-cart:active { transform: scale(0.95); }
-
-        /* --- SEPET CLOAT --- */
-        .cart-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--text);
-            color: var(--bg);
-            padding: 15px 25px;
-            border-radius: 50px;
+        /* ÜRÜN KARTLARI */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .p-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 15px;
+            transition: 0.3s;
+            border: 1px solid transparent;
+            position: relative;
+        }
+        .p-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transform: translateY(-5px);
+        }
+        .p-img {
+            width: 100%;
+            height: 180px;
+            background: #f8f8f8;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex; align-items: center; justify-content: center; font-size: 40px;
+        }
+        .p-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
+        .p-price { font-size: 18px; font-weight: 800; color: var(--primary); }
+        
+        .buy-btn {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
             font-weight: 700;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 6px;
             cursor: pointer;
-            z-index: 1000;
         }
+        .buy-btn:hover { background: var(--primary); color: white; }
 
-        /* --- iOS SWITCH --- */
-        .switch {
-            position: relative; display: inline-block;
-            width: 50px; height: 30px;
+        @media (max-width: 768px) {
+            .main-content { flex-direction: column; }
+            .sidebar { display: none; }
         }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider {
-            position: absolute; cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #39393d; border-radius: 30px;
-        }
-        .slider:before {
-            position: absolute; content: "";
-            height: 24px; width: 24px; left: 3px; bottom: 3px;
-            background-color: white; border-radius: 50%;
-        }
-        input:checked + .slider { background-color: #34c759; }
-        input:checked + .slider:before { transform: translateX(20px); }
-
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">NEXTGEN STORE</div>
-        <label class="switch">
-            <input type="checkbox" id="modeToggle" onclick="toggleTheme()">
-            <span class="slider"></span>
-        </label>
-    </header>
-
-    <div class="container">
-        <div class="product-card">
-            <div class="product-image">🎧</div>
-            <h3>Premium Headset</h3>
-            <p style="opacity: 0.6;">Yüksek kaliteli ses deneyimi</p>
-            <div class="price">2.499 TL</div>
-            <button class="add-to-cart" onclick="addToCart()">Sepete Ekle</button>
+    <nav>
+        <div class="logo">MEGASTORE</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Ürün, kategori veya marka ara...">
+            <button>Ara</button>
         </div>
+        <div class="nav-icons">🛒 Sepetim</div>
+    </nav>
 
-        <div class="product-card">
-            <div class="product-image">⌚</div>
-            <h3>Smart Watch V2</h3>
-            <p style="opacity: 0.6;">Sağlık takibi ve bildirimler</p>
-            <div class="price">4.199 TL</div>
-            <button class="add-to-cart" onclick="addToCart()">Sepete Ekle</button>
-        </div>
+    <div class="main-content">
+        <aside class="sidebar">
+            <h3>Kategoriler</h3>
+            <ul>
+                <li>💻 Elektronik</li>
+                <li>👕 Moda & Giyim</li>
+                <li>🏠 Ev & Yaşam</li>
+                <li>💄 Kozmetik</li>
+                <li>⚽ Spor & Outdoor</li>
+                <li>📚 Kitap & Hobi</li>
+            </ul>
+        </aside>
 
-        <div class="product-card">
-            <div class="product-image">📱</div>
-            <h3>iPhone 15 Pro</h3>
-            <p style="opacity: 0.6;">Titanyum tasarım, güçlü performans</p>
-            <div class="price">72.000 TL</div>
-            <button class="add-to-cart" onclick="addToCart()">Sepete Ekle</button>
-        </div>
+        <main class="products-area">
+            <div class="hero-banner">
+                <div>
+                    <h2 style="font-size: 32px;">Büyük Kış İndirimi!</h2>
+                    <p>Seçili ürünlerde %50'ye varan fırsatlar.</p>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="p-card">
+                    <div class="p-img">💻</div>
+                    <div class="p-title">MacBook Air M2 Chip</div>
+                    <div class="p-price">34.999 TL</div>
+                    <button class="buy-btn">Sepete Ekle</button>
+                </div>
+                <div class="p-card">
+                    <div class="p-img">🎧</div>
+                    <div class="p-title">Sony WH-1000XM5</div>
+                    <div class="p-price">12.450 TL</div>
+                    <button class="buy-btn">Sepete Ekle</button>
+                </div>
+                <div class="p-card">
+                    <div class="p-img">👟</div>
+                    <div class="p-title">Nike Air Max 270</div>
+                    <div class="p-price">4.200 TL</div>
+                    <button class="buy-btn">Sepete Ekle</button>
+                </div>
+                <div class="p-card">
+                    <div class="p-img">📸</div>
+                    <div class="p-title">Fujifilm X-T4 Mirrorless</div>
+                    <div class="p-price">45.000 TL</div>
+                    <button class="buy-btn">Sepete Ekle</button>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <div class="cart-float" id="cart-btn">
-        Sepetim (0)
-    </div>
-
-    <script>
-        let count = 0;
-        function addToCart() {
-            count++;
-            document.getElementById('cart-btn').innerText = `Sepetim (${count})`;
-            alert("Ürün sepete eklendi!");
-        }
-
-        function toggleTheme() {
-            const body = document.body;
-            if (document.getElementById('modeToggle').checked) {
-                body.setAttribute('data-theme', 'light');
-            } else {
-                body.removeAttribute('data-theme');
-            }
-        }
-    </script>
 </body>
 </html>
