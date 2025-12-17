@@ -6,20 +6,21 @@
     <title>Musa Can | @mutaffaa.l</title>
     <style>
         :root {
-            --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --glass: rgba(255, 255, 255, 0.15);
-            --border: rgba(255, 255, 255, 0.2);
+            --bg: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --glass: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.1);
             --text: #ffffff;
+            --accent: #6366f1;
         }
 
         [data-theme="light"] {
-            --bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --glass: rgba(255, 255, 255, 0.6);
-            --border: rgba(0, 0, 0, 0.1);
-            --text: #1a1a1a;
+            --bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --glass: rgba(255, 255, 255, 0.7);
+            --border: rgba(0, 0, 0, 0.05);
+            --text: #0f172a;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
 
         body {
             min-height: 100vh;
@@ -28,61 +29,63 @@
             justify-content: center;
             background: var(--bg);
             color: var(--text);
-            transition: 0.5s;
+            transition: background 0.5s ease;
             overflow: hidden;
             user-select: none;
         }
 
         /* iOS Switch */
-        .top-bar { position: fixed; top: 20px; right: 20px; display: flex; align-items: center; gap: 10px; z-index: 100; }
-        .switch { position: relative; width: 50px; height: 28px; cursor: pointer; }
+        .top-bar { position: fixed; top: 25px; right: 25px; display: flex; align-items: center; gap: 10px; z-index: 100; }
+        .switch { position: relative; width: 44px; height: 24px; cursor: pointer; }
         .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #ccc; border-radius: 34px; transition: 0.4s; }
-        .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.4s; }
-        input:checked + .slider { background: #34c759; }
-        input:checked + .slider:before { transform: translateX(22px); }
+        .slider { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #475569; border-radius: 34px; transition: 0.4s; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.4s; }
+        input:checked + .slider { background: #10b981; }
+        input:checked + .slider:before { transform: translateX(20px); }
 
-        /* Ana Kart */
+        /* Kart Yapısı */
         .container {
             background: var(--glass);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--border);
-            padding: 50px 30px;
-            border-radius: 30px;
+            padding: 40px 25px;
+            border-radius: 35px;
             text-align: center;
-            width: 90%;
-            max-width: 450px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            width: 92%;
+            max-width: 400px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
         }
 
-        h1 { font-size: 2.2rem; margin-bottom: 10px; letter-spacing: -1px; }
-        .username { opacity: 0.6; font-size: 0.9rem; margin-bottom: 30px; display: block; }
+        h1 { font-size: 2rem; font-weight: 800; margin-bottom: 5px; letter-spacing: -1px; }
+        .username { opacity: 0.5; font-size: 0.85rem; margin-bottom: 25px; display: block; font-weight: 500; }
 
-        /* Butonlar */
-        .btn-box { display: flex; flex-direction: column; gap: 12px; }
+        /* Buton Grubu */
+        .btn-box { display: flex; flex-direction: column; gap: 10px; }
         .btn {
             background: var(--glass);
             border: 1px solid var(--border);
             padding: 14px;
-            border-radius: 18px;
+            border-radius: 20px;
             color: var(--text);
             text-decoration: none;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            font-size: 0.95rem;
+            gap: 10px;
+            font-size: 0.9rem;
         }
-        .btn:hover { background: rgba(255,255,255,0.25); transform: translateY(-3px); }
-        .btn:active { transform: scale(0.96); }
+        
+        .btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+        .btn:active { transform: scale(0.97); }
 
-        /* Özel Renkli Butonlar */
-        .insta-btn { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border: none; color: white; }
-        .wa-btn { background: rgba(37, 211, 102, 0.2); }
+        /* Özel Buton Renkleri */
+        .insta-btn { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: white; border: none; }
+        .wa-btn { background: rgba(34, 197, 94, 0.15); border-color: rgba(34, 197, 94, 0.3); }
+        .extra-btn { background: var(--text); color: var(--bg); border: none; margin-top: 5px; }
 
         /* Bildirim */
         #toast {
@@ -90,12 +93,13 @@
             bottom: -60px;
             left: 50%;
             transform: translateX(-50%);
-            background: #34c759;
+            background: #10b981;
             color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.4s;
             z-index: 1000;
         }
         #toast.show { bottom: 30px; }
@@ -104,7 +108,6 @@
 <body oncontextmenu="return false">
 
     <div class="top-bar">
-        <span style="font-size: 0.8rem; font-weight: 600;">Mod</span>
         <label class="switch">
             <input type="checkbox" id="theme-toggle">
             <span class="slider"></span>
@@ -117,56 +120,60 @@
 
         <div class="btn-box">
             <div class="btn insta-btn" id="ig-btn">📸 Instagram</div>
-            
             <div class="btn wa-btn" id="w-btn">🟢 WhatsApp</div>
+            <div class="btn" id="m-btn">📧 E-posta Adresi</div>
             
-            <div class="btn" id="m-btn">📧 E-posta Gönder</div>
+            <div class="btn extra-btn" id="extra-btn">🌐 Diğer Bağlantılar</div>
         </div>
     </div>
 
-    <div id="toast">Başarıyla Kopyalandı!</div>
+    <div id="toast">Mail Adresi Kopyalandı!</div>
 
     <script>
         const info = {
             mail: "musacann273727@gmail.com",
-            gsm: "905XXXXXXXXX", // Burayı doldurmayı unutma knk
-            ig: "mutaffaa.l"
+            gsm: "905XXXXXXXXX", // BURAYI DOLDURMAYI UNUTMA KNK
+            ig: "mutaffaa.l",
+            extra: "https://www.google.com" // BURAYA İSTEDİĞİN LİNKİ YAZ
         };
 
-        // Instagram İşlemi
-        document.getElementById('ig-btn').addEventListener('click', function() {
+        // Instagram
+        document.getElementById('ig-btn').addEventListener('click', () => {
             window.open("https://www.instagram.com/" + info.ig, "_blank");
         });
 
-        // WhatsApp İşlemi
-        document.getElementById('w-btn').addEventListener('click', function() {
+        // WhatsApp
+        document.getElementById('w-btn').addEventListener('click', () => {
             window.open("https://wa.me/" + info.gsm, "_blank");
         });
 
-        // Mail İşlemi (Garantili Sistem)
-        document.getElementById('m-btn').addEventListener('click', function() {
-            const input = document.createElement('input');
-            input.value = info.mail;
-            document.body.appendChild(input);
-            input.select();
+        // Yeni Ekstra Buton
+        document.getElementById('extra-btn').addEventListener('click', () => {
+            window.open(info.extra, "_blank");
+        });
+
+        // Mail Kopyalama ve Tetikleme
+        document.getElementById('m-btn').addEventListener('click', () => {
+            const temp = document.createElement('input');
+            temp.value = info.mail;
+            document.body.appendChild(temp);
+            temp.select();
             document.execCommand('copy');
-            document.body.removeChild(input);
+            document.body.removeChild(temp);
 
             const toast = document.getElementById('toast');
-            toast.innerText = "Mail Adresi Kopyalandı!";
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
+            setTimeout(() => toast.classList.remove('show'), 2500);
 
-            setTimeout(() => { window.location.href = "mailto:" + info.mail; }, 500);
+            setTimeout(() => { window.location.href = "mailto:" + info.mail; }, 400);
         });
 
         // Tema Switcher
-        const toggle = document.getElementById('theme-toggle');
-        toggle.addEventListener('change', function() {
+        document.getElementById('theme-toggle').addEventListener('change', function() {
             document.body.setAttribute('data-theme', this.checked ? 'light' : 'dark');
         });
 
-        // Güvenlik
+        // Sağ Tık ve Kod Koruma
         document.onkeydown = (e) => {
             if(e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 73 || e.keyCode == 83))) return false;
         };
