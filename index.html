@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Creative Glassmorphism</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #fce7f3 0%, #dbeafe 50%, #f5f3ff 100%);
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --text-color: #1e293b;
+        }
+
+        [data-theme="dark"] {
+            --bg-gradient: linear-gradient(135deg, #4c1d95 0%, #1e3a8a 50%, #581c87 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-color: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, system-ui, sans-serif; }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-color);
+            transition: all 0.6s ease;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* iOS Switch */
+        .header {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--glass-bg);
+            padding: 8px 16px;
+            border-radius: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 46px;
+            height: 26px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px; width: 20px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: #34c759; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* Cam Kart */
+        .glass-card {
+            width: 90%;
+            max-width: 700px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 40px;
+            border: 1px solid var(--glass-border);
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1.5px; }
+        p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 40px; line-height: 1.6; }
+
+        /* Butonlar (Link bilgisi gizli) */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--glass-border);
+            padding: 12px 24px;
+            border-radius: 16px;
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .action-btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-3px); }
+
+    </style>
+</head>
+<body oncontextmenu="return false">
+
+    <div class="header">
+        <span style="font-size: 14px; font-weight: 500; opacity: 0.8;">Karanlık Mod</span>
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <div class="glass-card">
+        <h1>Merhaba, Gelecek Burada.</h1>
+        <p>Bu tasarım, şeffaflık ve modernliği bir araya getirir.<br>Gizlilik ve estetik ön planda.</p>
+        
+        <div class="btn-container">
+            <div class="action-btn" id="mail-btn">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                Send E-mail
+            </div>
+            <div class="action-btn" id="wa-btn">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-2.277 0-4.145 1.868-4.145 4.145 0 .819.24 1.583.652 2.227L7.433 16.2l3.784-1.077c.611.353 1.319.594 2.072.594 2.277 0 4.145-1.868 4.145-4.145 0-2.277-1.868-4.145-4.145-4.145z"></path></svg>
+                Write on WhatsApp
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Bilgileri Base64 olarak saklıyoruz (Ekstra Güvenlik)
+        // Senin mailin: musacann273727@gmail.com -> Base64
+        // Senin numaran: 905XXXXXXXXX -> Base64
+        const secret = {
+            m: "c2VuaW5tYWlsQGdtYWlsLmNvbQ==",
+            w: "OTA1XXXXXXXX" 
+        };
+
+        // Mail Butonu İşlemi
+        document.getElementById('mail-btn').addEventListener('click', function() {
+            window.location.href = "mailto:" + atob(secret.m);
+        });
+
+        // WhatsApp Butonu İşlemi
+        document.getElementById('wa-btn').addEventListener('click', function() {
+            window.open("https://wa.me/" + atob(secret.w), "_blank");
+        });
+
+        // Tema Geçişi
+        function toggleTheme() {
+            const body = document.body;
+            const isChecked = document.getElementById('theme-toggle').checked;
+            if (isChecked) {
+                body.setAttribute('data-theme', 'dark');
+            } else {
+                body.removeAttribute('data-theme');
+            }
+        }
+
+        // Koruma: F12 ve Sağ Tık
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 73))) return false;
+        };
+    </script>
+</body>
+</html>
