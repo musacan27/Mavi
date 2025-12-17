@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Creative Glassmorphism</title>
+    <title>Creative Glassmorphism | Musa Can</title>
     <style>
         :root {
             --bg-gradient: linear-gradient(135deg, #fce7f3 0%, #dbeafe 50%, #f5f3ff 100%);
@@ -97,7 +97,7 @@
         h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1.5px; }
         p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 40px; line-height: 1.6; }
 
-        /* Butonlar (Link bilgisi gizli) */
+        /* Butonlar */
         .btn-container {
             display: flex;
             justify-content: center;
@@ -150,38 +150,37 @@
     </div>
 
     <script>
-        // Bilgileri Base64 olarak saklıyoruz (Ekstra Güvenlik)
-        // Senin mailin: musacann273727@gmail.com -> Base64
-        // Senin numaran: 905XXXXXXXXX -> Base64
+        // Kendi mailini buraya doğru Base64 olarak ekledim
+        // musacann273727@gmail.com
         const secret = {
-            m: "c2VuaW5tYWlsQGdtYWlsLmNvbQ==",
-            w: "OTA1XXXXXXXX" 
+            m: "bXVzYWNhbm4yNzM3MjdAZ21haWwuY29t",
+            w: "OTA1XXXXXXXX" // Numaranı buraya yazmayı unutma!
         };
 
-        // Mail Butonu İşlemi
+        // Mail Tetikleyici (Kesin Çözüm)
         document.getElementById('mail-btn').addEventListener('click', function() {
-            window.location.href = "mailto:" + atob(secret.m);
+            const m = atob(secret.m);
+            const a = document.createElement('a');
+            a.href = "mailto:" + m;
+            a.click();
         });
 
-        // WhatsApp Butonu İşlemi
+        // WhatsApp Tetikleyici
         document.getElementById('wa-btn').addEventListener('click', function() {
-            window.open("https://wa.me/" + atob(secret.w), "_blank");
+            const w = atob(secret.w);
+            window.open("https://wa.me/" + w, "_blank");
         });
 
-        // Tema Geçişi
+        // Tema Değiştirme
         function toggleTheme() {
-            const body = document.body;
             const isChecked = document.getElementById('theme-toggle').checked;
-            if (isChecked) {
-                body.setAttribute('data-theme', 'dark');
-            } else {
-                body.removeAttribute('data-theme');
-            }
+            document.body.setAttribute('data-theme', isChecked ? 'dark' : 'light');
         }
 
-        // Koruma: F12 ve Sağ Tık
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 73))) return false;
+        // Koruma Sistemleri
+        document.oncontextmenu = () => false;
+        document.onkeydown = (e) => {
+            if(e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 73 || e.keyCode == 83))) return false;
         };
     </script>
 </body>
