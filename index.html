@@ -150,3 +150,29 @@
     </script>
 </body>
 </html>
+// Sağ tık engelleme
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Klavye kısayollarını engelleme (Ctrl+U, F12, Ctrl+Shift+I vb.)
+document.onkeydown = function(e) {
+    // F12 engelleme
+    if(e.keyCode == 123) {
+        return false;
+    }
+    // Ctrl+Shift+I (İncele) engelleme
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+        return false;
+    }
+    // Ctrl+Shift+J (Konsol) engelleme
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+        return false;
+    }
+    // Ctrl+U (Kaynak Kodu) engelleme
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+        return false;
+    }
+    // Ctrl+S (Kaydetme) engelleme
+    if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
+        return false;
+    }
+};
