@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Özel Dijital Alan</title>
     <style>
-        /* --- TEMEL AYARLAR --- */
+        /* --- RENKLER --- */
         :root {
-            --bg: #0f172a;
+            --bg: #0b0f19;
             --text: #ffffff;
             --accent: #38bdf8;
             --card: rgba(255, 255, 255, 0.05);
@@ -15,127 +15,161 @@
         }
 
         [data-theme="light"] {
-            --bg: #ffffff;
-            --text: #0f172a;
-            --accent: #0284c7;
-            --card: rgba(15, 23, 42, 0.05);
-            --border: rgba(15, 23, 42, 0.1);
+            --bg: #f2f2f7; /* iOS Açık Gri Arka Plan */
+            --text: #000000;
+            --accent: #007aff; /* iOS Mavi */
+            --card: #ffffff;
+            --border: rgba(0, 0, 0, 0.05);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
 
         body {
-            margin: 0;
-            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            transition: background 0.5s ease, color 0.5s ease;
             min-height: 100vh;
+            user-select: none;
         }
 
-        /* --- MOD DEĞİŞTİRME BUTONU (SAĞ ÜSTTE GÖRÜNÜR) --- */
-        #theme-toggle {
+        /* --- iOS SWITCH BUTONU --- */
+        .switch-container {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 999;
-            padding: 12px 20px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 50px;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 32px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
             cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #39393d; /* Kapalı renk */
+            transition: .4s;
+            border-radius: 34px;
         }
 
-        /* --- HAREKETLİ ARKA PLAN (KÜRELER) --- */
-        .glow {
-            position: fixed;
-            width: 400px;
-            height: 400px;
-            background: var(--accent);
-            filter: blur(120px);
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
             border-radius: 50%;
-            opacity: 0.1;
-            z-index: -1;
-            animation: float 15s infinite alternate;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
         }
 
-        @keyframes float {
-            from { transform: translate(-10%, -10%); }
-            to { transform: translate(100%, 50%); }
-        }
+        input:checked + .slider { background-color: #34c759; /* iOS Yeşil */ }
+        input:checked + .slider:before { transform: translateX(20px); }
 
         /* --- İÇERİK --- */
         .container {
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
             padding: 100px 20px;
         }
 
         .glass-card {
             background: var(--card);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border);
             padding: 30px;
             border-radius: 20px;
             margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        h1 { font-size: 3rem; margin-bottom: 40px; }
+        h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 30px; letter-spacing: -1px; }
 
-        /* --- İLETİŞİM BUTONLARI --- */
-        .btns { display: flex; gap: 10px; margin-top: 30px; }
-        .btn {
-            flex: 1;
-            padding: 15px;
+        /* --- GİZLİ BUTONLAR (SOL ALTTA BİLGİ GÖRÜNMEZ) --- */
+        .btn-group { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; }
+        
+        .custom-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
             text-align: center;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: bold;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
         }
-        .btn-mail { background: #333; color: white; }
-        .btn-wa { background: #25D366; color: white; }
+
+        .btn-wa { background-color: #25D366; color: white; }
+        .btn-mail { background-color: var(--text); color: var(--bg); }
 
     </style>
 </head>
 <body oncontextmenu="return false">
 
-    <button id="theme-toggle" onclick="toggleMode()">Gece/Gündüz Modu</button>
-
-    <div class="glow"></div>
+    <div class="switch-container">
+        <span style="font-size: 14px; font-weight: 500;">Aydınlık Mod</span>
+        <label class="switch">
+            <input type="checkbox" id="mode-trigger" onclick="toggleTheme()">
+            <span class="slider"></span>
+        </label>
+    </div>
 
     <div class="container">
-        <h1>Selam.</h1>
+        <h1>Günlük.</h1>
         
         <div class="glass-card">
-            <h3>Günlük Notlar</h3>
-            <p>Burası cam efektiyle parlayan, modern ve gizli blogum.</p>
+            <p style="opacity: 0.7; font-size: 14px; margin-bottom: 8px;">17 ARALIK 2025</p>
+            <h2 style="margin-bottom: 10px;">Yeni Arayüz</h2>
+            <p style="opacity: 0.8; line-height: 1.5;">iOS tarzı switch ve gizli link yapısıyla site artık çok daha profesyonel.</p>
         </div>
 
-        <div class="glass-card">
-            <h3>Gizli Bilgi</h3>
-            <p>Bu sayfayı sadece sen görebilirsin.</p>
-        </div>
-
-        <div class="btns">
-            <a href="mailto:musa.273727@gmail.com" class="btn btn-mail">Mail At</a>
-            <a href="https://wa.me/905308977672" class="btn btn-wa">WhatsApp</a>
+        <div class="btn-group">
+            <div class="custom-btn btn-mail" onclick="yonlendir('mail')">E-posta Gönder</div>
+            <div class="custom-btn btn-wa" onclick="yonlendir('wa')">WhatsApp Mesajı</div>
         </div>
     </div>
 
     <script>
-        // MOD DEĞİŞTİRME FONKSİYONU
-        function toggleMode() {
-            const body = document.body;
-            if (body.hasAttribute('data-theme')) {
-                body.removeAttribute('data-theme');
+        // BİLGİLERİ BURADAN GÜNCELLE
+        const bilgiler = {
+            email: "seninmail@gmail.com",
+            phone: "905XXXXXXXXX" 
+        };
+
+        // Yönlendirme Fonksiyonu (Sol altta link çıkmasını engeller)
+        function yonlendir(hedef) {
+            if(hedef === 'mail') {
+                window.location.href = "mailto:" + bilgiler.email;
             } else {
-                body.setAttribute('data-theme', 'light');
+                window.open("https://wa.me/" + bilgiler.phone, "_blank");
             }
         }
 
-        // KISAYOL ENGELLEME (Ctrl+U, F12 vb.)
+        // Tema Değiştirme
+        function toggleTheme() {
+            const body = document.body;
+            const isChecked = document.getElementById('mode-trigger').checked;
+            
+            if (isChecked) {
+                body.setAttribute('data-theme', 'light');
+            } else {
+                body.removeAttribute('data-theme');
+            }
+        }
+
+        // Güvenlik: F12 ve Ctrl+U engelleme
         document.onkeydown = function(e) {
             if(e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 'U'.charCodeAt(0) || e.keyCode == 'I'.charCodeAt(0)))) {
                 return false;
