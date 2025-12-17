@@ -3,201 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Musa Can | @mutaffaa.l</title>
+    <title>Mustafa Alper Bakır | Bu Benim İlk Dijital Kartvizitim</title>
     <style>
         :root {
-            --bg: #0f172a;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
+            --bg-gradient: linear-gradient(45deg, #f39c12, #e91e63, #9c27b0, #2196f3);
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
             --text: #ffffff;
         }
 
         [data-theme="light"] {
-            --bg: #f1f5f9;
-            --glass: rgba(255, 255, 255, 0.8);
-            --border: rgba(0, 0, 0, 0.05);
-            --text: #1e293b;
+            --glass: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --text: #1a1a1a;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 
         body {
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--bg);
-            color: var(--text);
-            transition: 0.4s;
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: moveBg 15s ease infinite;
             overflow: hidden;
-            user-select: none;
+            transition: 0.5s;
         }
-        /* iOS Switch */
-        .top-bar { position: fixed; top: 20px; right: 20px; display: flex; align-items: center; gap: 10px; z-index: 100; }
-        .switch { position: relative; width: 50px; height: 28px; cursor: pointer; }
+
+        @keyframes moveBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* iOS Switch (Karanlık Mod) */
+        .top-bar {
+            position: fixed; top: 30px; right: 30px;
+            display: flex; align-items: center; gap: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 15px; border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            z-index: 100;
+        }
+
+        .switch { position: relative; width: 44px; height: 24px; cursor: pointer; }
         .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #ccc; border-radius: 34px; transition: 0.4s; }
-        .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.4s; }
+        .slider {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: #ccc; border-radius: 34px; transition: 0.4s;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 18px; width: 18px;
+            left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.4s;
+        }
         input:checked + .slider { background: #34c759; }
-        input:checked + .slider:before { transform: translateX(22px); }
-       
-        /* Ana Kart */
-        .container {
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* Ana Cam Panel */
+        .glass-card {
             background: var(--glass);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border);
-            padding: 45px 25px;
-            border-radius: 40px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 50px 40px;
+            border-radius: 30px;
             text-align: center;
             width: 90%;
-            max-width: 400px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            max-width: 550px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+            color: var(--text);
+            animation: cardFade 1s ease;
         }
 
-        h1 { font-size: 2.2rem; margin-bottom: 5px; letter-spacing: -1px; }
-        .username { opacity: 0.5; display: block; margin-bottom: 35px; font-size: 0.9rem; font-weight: 500; }
+        @keyframes cardFade { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        h1 { font-size: 2.2rem; margin-bottom: 15px; font-weight: 700; }
+        p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 30px; line-height: 1.6; }
 
         /* Butonlar */
-        .btn-box { display: flex; flex-direction: column; gap: 15px; }
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .btn {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            padding: 18px;
-            border-radius: 22px;
-            color: var(--text);
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        .btn:active { transform: scale(0.94); }
-        .insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); border: none; color: white; }
-        .wa { background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.2); }
-
-        /* Mail Modal */
-        #mail-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(15px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 35px;
-            text-align: center;
-            width: 85%;
-            max-width: 350px;
-        }
-
-        .mail-display {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 15px;
-            margin: 20px 0;
-            font-size: 0.85rem;
-            border: 1px dashed var(--border);
-            color: var(--text);
-        }
-
-        .action-btn {
-            background: #10b981;
-            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
             padding: 14px;
             border-radius: 15px;
+            color: var(--text);
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
             cursor: pointer;
-            font-weight: bold;
-            margin-bottom: 10px;
         }
+        .btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-3px); }
+        .btn-full { grid-column: span 2; }
+        .insta-btn { background: linear-gradient(45deg, #f09433, #e100ff); color: white; border: none; }
 
-        .close-btn { opacity: 0.5; font-size: 0.8rem; cursor: pointer; margin-top: 15px; }
-
+        /* Gizlilik Bildirimi (Sağ Tık) */
+        #privacy-toast {
+            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8); color: white; padding: 12px 25px;
+            border-radius: 50px; transition: 0.5s; font-size: 0.9rem; z-index: 1000;
+        }
     </style>
 </head>
-<body oncontextmenu="return false">
+<body>
 
-    <div class="container">
-        <h1>Musa Can</h1>
-        <span class="username">@mutaffaa.l</span>
+    <div class="top-bar">
+        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text);">Karanlık Mod</span>
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle" checked>
+            <span class="slider"></span>
+        </label>
+    </div>
 
-        <div class="btn-box">
-            <div class="btn insta" id="ig-go">📸 Instagram</div>
+    <div class="glass-card">
+        <h1>Merhaba, Gelecek Burada.</h1>
+        <p>Bu tasarım, şeffaflık ve modernliği bir araya getirir. <br> Gizlilik ve estetik ön planda.</p>
+        
+        <div class="btn-grid">
+            <div class="btn insta-btn btn-full" id="ig-btn">📸 Instagram: @mutaffaa.l</div>
             
-            <div class="btn wa" id="wa-go">🟢 WhatsApp</div>
+            <div class="btn" onclick="window.open('https://wa.me/905XXXXXXXXX', '_blank')">💬 WhatsApp</div>
             
-            <div class="btn" id="mail-open">📧 E-posta Adresim</div>
+            <div class="btn" id="mail-btn">✉️ Send E-mail</div>
         </div>
     </div>
 
-    <div id="mail-modal">
-        <div class="modal-content">
-            <h3 style="font-size: 1.2rem;">E-posta Adresim</h3>
-            <div class="mail-display" id="target-mail">musacann273727@gmail.com</div>
-            <div class="action-btn" id="copy-mail">Adresi Kopyala</div>
-            <div class="action-btn" style="background: #4285F4;" id="gmail-go">Gmail ile Yaz</div>
-            <div class="close-btn" id="mail-close">Kapat</div>
-        </div>
-    </div>
+    <div id="privacy-toast">🔒 Gizlilik ve Güvenlik Modu Aktif</div>
 
     <script>
-        const config = {
-            ig: "mutaffaa.l",
-            wa: "905XXXXXXXXX", // Buraya numaranı yaz knk
-            mail: "musacann273727@gmail.com"
-        };
-
-        // Instagram: Önce uygulama, olmazsa web
-        document.getElementById('ig-go').onclick = () => {
+        // --- 1. Instagram Akıllı Yönlendirme ---
+        document.getElementById('ig-btn').onclick = () => {
+            const user = "mutaffaa.l";
             const start = Date.now();
-            window.location.href = "instagram://user?username=" + config.ig;
+            window.location.href = "instagram://user?username=" + user;
             setTimeout(() => {
-                if (Date.now() - start < 1000) {
-                    window.open("https://www.instagram.com/" + config.ig, "_blank");
-                }
+                if (Date.now() - start < 1500) window.open("https://www.instagram.com/" + user, "_blank");
             }, 500);
         };
 
-        // WhatsApp
-        document.getElementById('wa-go').onclick = () => {
-            window.open("https://wa.me/" + config.wa, "_blank");
+        // --- 2. Mail Kopyalama / Açma ---
+        document.getElementById('mail-btn').onclick = function() {
+            const mail = "musacann273727@gmail.com";
+            navigator.clipboard.writeText(mail);
+            this.innerText = "Kopyalandı! ✅";
+            setTimeout(() => { 
+                this.innerText = "✉️ Send E-mail";
+                window.location.href = "mailto:" + mail;
+            }, 1000);
         };
 
-        // Mail Panel Kontrolü
-        const modal = document.getElementById('mail-modal');
-        document.getElementById('mail-open').onclick = () => modal.style.display = 'flex';
-        document.getElementById('mail-close').onclick = () => modal.style.display = 'none';
-
-        // Kopyalama
-        document.getElementById('copy-mail').onclick = function() {
-            navigator.clipboard.writeText(config.mail);
-            this.innerText = "KOPYALANDI!";
-            this.style.background = "#059669";
-            setTimeout(() => {
-                this.innerText = "Adresi Kopyala";
-                this.style.background = "#10b981";
-                modal.style.display = 'none';
-            }, 1200);
+        // --- 3. iOS Tema Değiştirici ---
+        document.getElementById('theme-toggle').onchange = function() {
+            document.body.setAttribute('data-theme', this.checked ? 'dark' : 'light');
         };
 
-        // Gmail Web Yönlendirme
-        document.getElementById('gmail-go').onclick = () => {
-            window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${config.mail}`, '_blank');
-        };
+        // --- 4. Sağ Tık Gizlilik Koruması ---
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            const toast = document.getElementById('privacy-toast');
+            toast.style.bottom = '30px';
+            setTimeout(() => { toast.style.bottom = '-100px'; }, 2500);
+        });
 
-        // Güvenlik (F12, Sağ Tık)
-        document.onkeydown = (e) => {
-            if(e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 73 || e.keyCode == 83))) return false;
+        // Klavye koruması (F12 ve Ctrl+U engelleme)
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123 || (e.ctrlKey && e.keyCode == 85)) return false;
         };
     </script>
 </body>
