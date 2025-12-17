@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Mustafa Alper Bakır | Bu Benim İlk Dijital Kartvizitim</title>
+    <title>Mustafa Bakır | Bu Benim İlk Dijital Kartvizitim</title>
     <style>
         :root {
             --bg-gradient: linear-gradient(45deg, #f39c12, #e91e63, #9c27b0, #2196f3);
@@ -30,6 +30,7 @@
             animation: moveBg 15s ease infinite;
             overflow: hidden;
             transition: 0.5s;
+            user-select: none;
         }
 
         @keyframes moveBg {
@@ -38,7 +39,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* iOS Switch (Karanlık Mod) */
+        /* iOS Switch */
         .top-bar {
             position: fixed; top: 30px; right: 30px;
             display: flex; align-items: center; gap: 10px;
@@ -62,11 +63,11 @@
         input:checked + .slider { background: #34c759; }
         input:checked + .slider:before { transform: translateX(20px); }
 
-        /* Ana Cam Panel */
+        /* Card */
         .glass-card {
             background: var(--glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
             padding: 50px 40px;
             border-radius: 30px;
@@ -75,18 +76,14 @@
             max-width: 550px;
             box-shadow: 0 25px 45px rgba(0,0,0,0.2);
             color: var(--text);
-            animation: cardFade 1s ease;
         }
-
-        @keyframes cardFade { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
         h1 { font-size: 2.2rem; margin-bottom: 15px; font-weight: 700; }
         p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 30px; line-height: 1.6; }
 
-        /* Butonlar */
         .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .btn {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             border: 1px solid var(--glass-border);
             padding: 14px;
             border-radius: 15px;
@@ -97,11 +94,10 @@
             display: flex; align-items: center; justify-content: center; gap: 8px;
             cursor: pointer;
         }
-        .btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-3px); }
+        .btn:active { transform: scale(0.95); }
         .btn-full { grid-column: span 2; }
         .insta-btn { background: linear-gradient(45deg, #f09433, #e100ff); color: white; border: none; }
 
-        /* Gizlilik Bildirimi (Sağ Tık) */
         #privacy-toast {
             position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.8); color: white; padding: 12px 25px;
@@ -121,57 +117,51 @@
 
     <div class="glass-card">
         <h1>Merhaba, Ben Mustafa</h1>
-        <p> 17 Yaşındayım Ve Bu Benim İlk Kartvizitim <br>:)(:</p>
+        <p>17 Yaşındayım Ve Bu Benim İlk Kartvizitim<br>:)(:</p>
         
         <div class="btn-grid">
-            <div class="btn insta-btn btn-full" id="ig-btn">📸 Instagram</div>
+            <a href="javascript:void(0)" class="btn insta-btn btn-full" onclick="openInstagram()">📸 Instagram</a>
             
-            <div class="btn" onclick="window.open('https://wa.me/905XXXXXXXXX', '_blank')">💬 WhatsApp</div>
+            <a href="https://wa.me/905XXXXXXXXX" target="_blank" class="btn">💬 WhatsApp</a>
             
-            <div class="btn" id="mail-btn">✉️ E-posta</div>
+            <a href="mailto:musacann273727@gmail.com" class="btn">✉️ E-posta</a>
         </div>
     </div>
 
     <div id="privacy-toast">🔒 Gizlilik ve Güvenlik Modu Aktif</div>
 
     <script>
-        // --- 1. Instagram Akıllı Yönlendirme ---
-        document.getElementById('ig-btn').onclick = () => {
-            const user = "mutaffaa.l";
-            const start = Date.now();
-            window.location.href = "instagram://user?username=" + user;
-            setTimeout(() => {
-                if (Date.now() - start < 1500) window.open("https://www.instagram.com/" + user, "_blank");
-            }, 500);
-        };
+        // Instagram Uygulama Açma Fonksiyonu
+        function openInstagram() {
+            const username = "mustaffaa.l";
+            const appUrl = "instagram://user?username=" + username;
+            const webUrl = "https://www.instagram.com/" + username;
+            
+            // Uygulamayı denemek için bir iframe veya direkt lokasyon kullanılır
+            window.location.href = appUrl;
 
-        // --- 2. Mail Kopyalama / Açma ---
-        document.getElementById('mail-btn').onclick = function() {
-            const mail = "musacann273727@gmail.com";
-            navigator.clipboard.writeText(mail);
-            this.innerText = "Kopyalandı! ✅";
-            setTimeout(() => { 
-                this.innerText = "✉️ Send E-mail";
-                window.location.href = "mailto:" + mail;
-            }, 1000);
-        };
+            // Eğer 2 saniye içinde uygulama açılmazsa web sitesine yönlendir
+            setTimeout(function() {
+                window.open(webUrl, '_blank');
+            }, 2000);
+        }
 
-        // --- 3. iOS Tema Değiştirici ---
+        // Tema Switcher
         document.getElementById('theme-toggle').onchange = function() {
             document.body.setAttribute('data-theme', this.checked ? 'dark' : 'light');
         };
 
-        // --- 4. Sağ Tık Gizlilik Koruması ---
+        // Sağ Tık Engelleme (Gizlilik)
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
             const toast = document.getElementById('privacy-toast');
             toast.style.bottom = '30px';
-            setTimeout(() => { toast.style.bottom = '-100px'; }, 2500);
+            setTimeout(() => { toast.style.bottom = '-100px'; }, 2000);
         });
 
-        // Klavye koruması (F12 ve Ctrl+U engelleme)
+        // Klavye Koruması
         document.onkeydown = function(e) {
-            if(e.keyCode == 123 || (e.ctrlKey && e.keyCode == 85)) return false;
+            if(e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 73 || e.keyCode == 74))) return false;
         };
     </script>
 </body>
