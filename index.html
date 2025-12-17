@@ -3,81 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Özel Dijital Alan</title>
+    <title>Özel Blog</title>
     <style>
-        /* --- RENKLER --- */
         :root {
             --bg: #0b0f19;
             --text: #ffffff;
-            --accent: #38bdf8;
             --card: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
         }
-
         [data-theme="light"] {
-            --bg: #f2f2f7; /* iOS Açık Gri Arka Plan */
+            --bg: #f2f2f7;
             --text: #000000;
-            --accent: #007aff; /* iOS Mavi */
             --card: #ffffff;
-            --border: rgba(0, 0, 0, 0.05);
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            font-family: -apple-system, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            min-height: 100vh;
-            user-select: none;
+            transition: 0.4s;
+            user-select: none; /* Metin seçmeyi engeller */
         }
 
-        /* --- iOS SWITCH BUTONU --- */
-        .switch-container {
+        /* iOS SWITCH */
+        .switch-area {
             position: fixed;
-            top: 30px;
-            right: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            top: 25px;
+            right: 25px;
             z-index: 1000;
         }
-
         .switch {
             position: relative;
             display: inline-block;
-            width: 52px;
-            height: 32px;
+            width: 50px;
+            height: 30px;
         }
-
         .switch input { opacity: 0; width: 0; height: 0; }
-
         .slider {
             position: absolute;
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #39393d; /* Kapalı renk */
+            background-color: #39393d;
+            border-radius: 30px;
             transition: .4s;
-            border-radius: 34px;
         }
-
         .slider:before {
             position: absolute;
             content: "";
-            height: 26px;
-            width: 26px;
-            left: 3px;
-            bottom: 3px;
+            height: 24px; width: 24px;
+            left: 3px; bottom: 3px;
             background-color: white;
-            transition: .4s;
             border-radius: 50%;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            transition: .4s;
         }
-
-        input:checked + .slider { background-color: #34c759; /* iOS Yeşil */ }
+        input:checked + .slider { background-color: #34c759; }
         input:checked + .slider:before { transform: translateX(20px); }
 
-        /* --- İÇERİK --- */
         .container {
             max-width: 500px;
             margin: 0 auto;
@@ -86,94 +67,75 @@
 
         .glass-card {
             background: var(--card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(128,128,128,0.2);
             padding: 30px;
             border-radius: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 30px; letter-spacing: -1px; }
-
-        /* --- GİZLİ BUTONLAR (SOL ALTTA BİLGİ GÖRÜNMEZ) --- */
-        .btn-group { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; }
-        
-        .custom-btn {
+        /* GİZLİ BUTONLAR - Link Değildir! */
+        .action-btn {
             width: 100%;
-            padding: 16px;
-            border-radius: 14px;
+            padding: 18px;
+            margin-top: 15px;
+            border-radius: 15px;
             text-align: center;
-            font-weight: 600;
-            cursor: pointer;
+            font-weight: 700;
+            cursor: pointer; /* Tıklanabilir el imleci çıkar */
+            transition: 0.3s;
             border: none;
-            font-size: 16px;
+            display: block;
         }
-
-        .btn-wa { background-color: #25D366; color: white; }
-        .btn-mail { background-color: var(--text); color: var(--bg); }
+        .btn-wa { background: #25D366; color: white; }
+        .btn-mail { background: var(--text); color: var(--bg); }
+        .action-btn:hover { transform: scale(1.02); opacity: 0.9; }
 
     </style>
 </head>
 <body oncontextmenu="return false">
 
-    <div class="switch-container">
-        <span style="font-size: 14px; font-weight: 500;">Aydınlık Mod</span>
+    <div class="switch-area">
         <label class="switch">
-            <input type="checkbox" id="mode-trigger" onclick="toggleTheme()">
+            <input type="checkbox" id="modeCheck" onclick="temaDegistir()">
             <span class="slider"></span>
         </label>
     </div>
 
     <div class="container">
-        <h1>Günlük.</h1>
-        
         <div class="glass-card">
-            <p style="opacity: 0.7; font-size: 14px; margin-bottom: 8px;">17 ARALIK 2025</p>
-            <h2 style="margin-bottom: 10px;">Yeni Arayüz</h2>
-            <p style="opacity: 0.8; line-height: 1.5;">iOS tarzı switch ve gizli link yapısıyla site artık çok daha profesyonel.</p>
-        </div>
-
-        <div class="btn-group">
-            <div class="custom-btn btn-mail" onclick="yonlendir('mail')">E-posta Gönder</div>
-            <div class="custom-btn btn-wa" onclick="yonlendir('wa')">WhatsApp Mesajı</div>
+            <h1>Merhaba.</h1>
+            <p>Bu butonların üzerine geldiğinde tarayıcının sol altında hiçbir bilgi çıkmaz. Tam koruma sağlandı.</p>
+            
+            <div class="action-btn btn-mail" onclick="islem('mail')">E-posta Gönder</div>
+            <div class="action-btn btn-wa" onclick="islem('wa')">WhatsApp'tan Yaz</div>
         </div>
     </div>
 
     <script>
-        // BİLGİLERİ BURADAN GÜNCELLE
-        const bilgiler = {
-            email: "seninmail@gmail.com",
-            phone: "905XXXXXXXXX" 
-        };
+        // Bilgilerini buraya yaz knk
+        const m = "seninmailin@gmail.com";
+        const n = "905308977672";
 
-        // Yönlendirme Fonksiyonu (Sol altta link çıkmasını engeller)
-        function yonlendir(hedef) {
-            if(hedef === 'mail') {
-                window.location.href = "mailto:" + bilgiler.email;
+        function islem(tip) {
+            if(tip === 'mail') {
+                // Linke tıklanmış gibi yapar ama status barda göstermez
+                window.location.href = "mailto:" + m;
             } else {
-                window.open("https://wa.me/" + bilgiler.phone, "_blank");
+                window.open("https://wa.me/" + n, "_blank");
             }
         }
 
-        // Tema Değiştirme
-        function toggleTheme() {
+        function temaDegistir() {
             const body = document.body;
-            const isChecked = document.getElementById('mode-trigger').checked;
-            
-            if (isChecked) {
-                body.setAttribute('data-theme', 'light');
-            } else {
-                body.removeAttribute('data-theme');
-            }
+            const check = document.getElementById('modeCheck').checked;
+            if(check) body.setAttribute('data-theme', 'light');
+            else body.removeAttribute('data-theme');
         }
 
-        // Güvenlik: F12 ve Ctrl+U engelleme
+        // F12 ve Sağ Tık koruması devam ediyor
         document.onkeydown = function(e) {
-            if(e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 'U'.charCodeAt(0) || e.keyCode == 'I'.charCodeAt(0)))) {
-                return false;
-            }
+            if(e.keyCode == 123 || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) return false;
         };
     </script>
 </body>
