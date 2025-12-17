@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Musa Can | Dijital Kartvizit</title>
+    <title>Musa Can | @mutaffaa.l</title>
     <style>
         :root {
             --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -45,27 +45,27 @@
         /* Ana Kart */
         .container {
             background: var(--glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--border);
             padding: 50px 30px;
             border-radius: 30px;
             text-align: center;
             width: 90%;
-            max-width: 500px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            max-width: 450px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
         }
 
-        h1 { font-size: 2.2rem; margin-bottom: 15px; letter-spacing: -1px; }
-        p { opacity: 0.8; margin-bottom: 35px; font-size: 1rem; }
+        h1 { font-size: 2.2rem; margin-bottom: 10px; letter-spacing: -1px; }
+        .username { opacity: 0.6; font-size: 0.9rem; margin-bottom: 30px; display: block; }
 
         /* Butonlar */
-        .btn-box { display: flex; flex-direction: column; gap: 15px; }
+        .btn-box { display: flex; flex-direction: column; gap: 12px; }
         .btn {
             background: var(--glass);
             border: 1px solid var(--border);
-            padding: 15px;
-            border-radius: 15px;
+            padding: 14px;
+            border-radius: 18px;
             color: var(--text);
             text-decoration: none;
             font-weight: 600;
@@ -74,15 +74,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
+            font-size: 0.95rem;
         }
         .btn:hover { background: rgba(255,255,255,0.25); transform: translateY(-3px); }
-        .btn:active { transform: scale(0.95); }
+        .btn:active { transform: scale(0.96); }
 
-        /* Bildirim (Toast) */
+        /* Özel Renkli Butonlar */
+        .insta-btn { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border: none; color: white; }
+        .wa-btn { background: rgba(37, 211, 102, 0.2); }
+
+        /* Bildirim */
         #toast {
             position: fixed;
-            bottom: -50px;
+            bottom: -60px;
             left: 50%;
             transform: translateX(-50%);
             background: #34c759;
@@ -108,25 +113,38 @@
 
     <div class="container">
         <h1>Musa Can</h1>
-        <p>Dijital dünyama hoş geldin. Aşağıdaki butonlar üzerinden benimle iletişime geçebilirsin.</p>
+        <span class="username">@mutaffaa.l</span>
 
         <div class="btn-box">
+            <div class="btn insta-btn" id="ig-btn">📸 Instagram</div>
+            
+            <div class="btn wa-btn" id="w-btn">🟢 WhatsApp</div>
+            
             <div class="btn" id="m-btn">📧 E-posta Gönder</div>
-            <div class="btn" id="w-btn" style="background: rgba(37, 211, 102, 0.2);">🟢 WhatsApp</div>
         </div>
     </div>
 
-    <div id="toast">Mail Adresi Kopyalandı!</div>
+    <div id="toast">Başarıyla Kopyalandı!</div>
 
     <script>
         const info = {
             mail: "musacann273727@gmail.com",
-            gsm: "905XXXXXXXXX" // Buraya numaranı yaz knk
+            gsm: "905XXXXXXXXX", // Burayı doldurmayı unutma knk
+            ig: "mutaffaa.l"
         };
 
-        // --- MAIL BUTONU (Garantili Sistem) ---
+        // Instagram İşlemi
+        document.getElementById('ig-btn').addEventListener('click', function() {
+            window.open("https://www.instagram.com/" + info.ig, "_blank");
+        });
+
+        // WhatsApp İşlemi
+        document.getElementById('w-btn').addEventListener('click', function() {
+            window.open("https://wa.me/" + info.gsm, "_blank");
+        });
+
+        // Mail İşlemi (Garantili Sistem)
         document.getElementById('m-btn').addEventListener('click', function() {
-            // 1. Kopyalama işlemi
             const input = document.createElement('input');
             input.value = info.mail;
             document.body.appendChild(input);
@@ -134,30 +152,21 @@
             document.execCommand('copy');
             document.body.removeChild(input);
 
-            // 2. Bildirim göster
             const toast = document.getElementById('toast');
+            toast.innerText = "Mail Adresi Kopyalandı!";
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 3000);
 
-            // 3. Mail Uygulamasını Tetikle (Opsiyonel)
-            setTimeout(() => {
-                window.location.href = "mailto:" + info.mail;
-            }, 500);
+            setTimeout(() => { window.location.href = "mailto:" + info.mail; }, 500);
         });
 
-        // --- WHATSAPP BUTONU ---
-        document.getElementById('w-btn').addEventListener('click', function() {
-            window.open("https://wa.me/" + info.gsm, "_blank");
-        });
-
-        // --- TEMA DEĞİŞTİRİCİ ---
+        // Tema Switcher
         const toggle = document.getElementById('theme-toggle');
         toggle.addEventListener('change', function() {
-            if(this.checked) document.body.setAttribute('data-theme', 'light');
-            else document.body.removeAttribute('data-theme');
+            document.body.setAttribute('data-theme', this.checked ? 'light' : 'dark');
         });
 
-        // --- GÜVENLİK ---
+        // Güvenlik
         document.onkeydown = (e) => {
             if(e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 73 || e.keyCode == 83))) return false;
         };
