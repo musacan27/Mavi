@@ -2,159 +2,194 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Özel Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen Store | Premium Alışveriş</title>
     <style>
         :root {
             --bg: #0b0f19;
             --text: #ffffff;
             --card: rgba(255, 255, 255, 0.05);
+            --accent: #34c759;
             --border: rgba(255, 255, 255, 0.1);
         }
+
         [data-theme="light"] {
             --bg: #f2f2f7;
             --text: #1c1c1e;
             --card: #ffffff;
+            --accent: #007aff;
             --border: rgba(0, 0, 0, 0.05);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: 0.3s ease; }
 
         body {
             font-family: -apple-system, system-ui, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        /* --- HEADER & NAVBAR --- */
+        header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: rgba(var(--bg), 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; }
+
+        /* --- PRODUCT GRID --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: rgba(128,128,128,0.1);
+            border-radius: 18px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            user-select: none;
+            font-size: 3rem;
         }
 
-        /* iOS SWITCH */
-        .switch-area {
+        .price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 10px 0;
+            color: var(--accent);
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .add-to-cart:active { transform: scale(0.95); }
+
+        /* --- SEPET CLOAT --- */
+        .cart-float {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 30px;
+            background: var(--text);
+            color: var(--bg);
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            cursor: pointer;
             z-index: 1000;
         }
+
+        /* --- iOS SWITCH --- */
         .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 30px;
+            position: relative; display: inline-block;
+            width: 50px; height: 30px;
         }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider {
-            position: absolute;
-            cursor: pointer;
+            position: absolute; cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #39393d;
-            border-radius: 30px;
+            background-color: #39393d; border-radius: 30px;
         }
         .slider:before {
-            position: absolute;
-            content: "";
-            height: 24px; width: 24px;
-            left: 3px; bottom: 3px;
-            background-color: white;
-            border-radius: 50%;
+            position: absolute; content: "";
+            height: 24px; width: 24px; left: 3px; bottom: 3px;
+            background-color: white; border-radius: 50%;
         }
         input:checked + .slider { background-color: #34c759; }
         input:checked + .slider:before { transform: translateX(20px); }
 
-        /* KART TASARIMI */
-        .container {
-            width: 90%; /* Mobilde ekranı kaplamasın diye */
-            max-width: 400px; /* Kartın maksimum genişliği */
-            margin: 0 auto;
-        }
-
-        .glass-card {
-            background: var(--card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            padding: 25px; /* İç boşluğu biraz azalttık */
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        h1 { font-size: 2rem; margin-bottom: 10px; font-weight: 700; }
-        p { opacity: 0.7; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.4; }
-
-        /* BUTON GRUBU - TAŞMAYI ÖNLEYEN YAPI */
-        .btn-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .action-btn {
-            width: 100%; /* Kartın içinde kalmasını sağlar */
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-wa { background: #25D366; color: white; }
-        .btn-mail { background: var(--text); color: var(--bg); }
-        .action-btn:hover { opacity: 0.9; transform: scale(0.98); }
-
     </style>
 </head>
-<body oncontextmenu="return false">
+<body>
 
-    <div class="switch-area">
+    <header>
+        <div class="logo">NEXTGEN STORE</div>
         <label class="switch">
-            <input type="checkbox" id="modeCheck" onclick="temaDegistir()">
+            <input type="checkbox" id="modeToggle" onclick="toggleTheme()">
             <span class="slider"></span>
         </label>
-    </div>
+    </header>
 
     <div class="container">
-        <div class="glass-card">
-            <h1>Profilim</h1>
-            <p>Taşma sorunu giderildi, artık her cihazda tam sığıyor.</p>
-            
-            <div class="btn-wrapper">
-                <div class="action-btn btn-mail" onclick="islem('mail')">E-posta Gönder</div>
-                <div class="action-btn btn-wa" onclick="islem('wa')">WhatsApp'tan Yaz</div>
-            </div>
+        <div class="product-card">
+            <div class="product-image">🎧</div>
+            <h3>Premium Headset</h3>
+            <p style="opacity: 0.6;">Yüksek kaliteli ses deneyimi</p>
+            <div class="price">2.499 TL</div>
+            <button class="add-to-cart" onclick="addToCart()">Sepete Ekle</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">⌚</div>
+            <h3>Smart Watch V2</h3>
+            <p style="opacity: 0.6;">Sağlık takibi ve bildirimler</p>
+            <div class="price">4.199 TL</div>
+            <button class="add-to-cart" onclick="addToCart()">Sepete Ekle</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">📱</div>
+            <h3>iPhone 15 Pro</h3>
+            <p style="opacity: 0.6;">Titanyum tasarım, güçlü performans</p>
+            <div class="price">72.000 TL</div>
+            <button class="add-to-cart" onclick="addToCart()">Sepete Ekle</button>
         </div>
     </div>
 
-    <script>
-        // Bilgilerini buraya yaz
-        const mailAdresi = "seninmail@gmail.com";
-        const telNo = "905XXXXXXXXX";
+    <div class="cart-float" id="cart-btn">
+        Sepetim (0)
+    </div>
 
-        function islem(tip) {
-            if(tip === 'mail') {
-                window.location.href = "mailto:" + mailAdresi;
+    <script>
+        let count = 0;
+        function addToCart() {
+            count++;
+            document.getElementById('cart-btn').innerText = `Sepetim (${count})`;
+            alert("Ürün sepete eklendi!");
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            if (document.getElementById('modeToggle').checked) {
+                body.setAttribute('data-theme', 'light');
             } else {
-                window.open("https://wa.me/" + telNo, "_blank");
+                body.removeAttribute('data-theme');
             }
         }
-
-        function temaDegistir() {
-            const body = document.body;
-            const isChecked = document.getElementById('modeCheck').checked;
-            if(isChecked) body.setAttribute('data-theme', 'light');
-            else body.removeAttribute('data-theme');
-        }
-
-        // F12 ve Ctrl+U engeli
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123 || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) return false;
-        };
     </script>
 </body>
 </html>
